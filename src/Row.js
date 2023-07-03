@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "./axios";
 import "./Row.css";
+import Compressor from "compressorjs";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -19,6 +20,13 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
   /* used fetcurl again so useeffect understands that something
   changed and it needs to render again*/
 
+  //opens another tab to preview the trailer
+
+  function trailerPlay(title) {
+    const youtubeUrl = `https://www.youtube.com/results?search_query=${title}`;
+    window.open(youtubeUrl, "_blank");
+  }
+
   return (
     <div className="row">
       <h2>{title}</h2>
@@ -32,6 +40,7 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
               isLargeRow ? movie.poster_path : movie.backdrop_path
             }`}
             alt={movie.name}
+            onClick={() => trailerPlay(movie.title)}
           />
         ))}
       </div>

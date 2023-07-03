@@ -24,6 +24,11 @@ const Banner = () => {
   function truncate(str, num) {
     return str?.length > num ? str.substr(0, num - 1) + "..." : str;
   }
+  function trailerPlay(title) {
+    const youtubeUrl = `https://www.youtube.com/results?search_query=${title}`;
+    window.open(youtubeUrl, "_blank");
+  }
+
   return (
     <header
       className="banner"
@@ -38,7 +43,12 @@ const Banner = () => {
           {movie?.title || movie?.name || movie?.original_name}
         </h1>
         <div className="banner_buttons">
-          <button className="banner_button">Play</button>
+          <button
+            className="banner_button"
+            onClick={() => trailerPlay(movie.name)}
+          >
+            Play
+          </button>
           <button className="banner_button">My List</button>
         </div>
         <h1 className="banner_description">{truncate(movie?.overview, 150)}</h1>
